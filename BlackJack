@@ -3,6 +3,27 @@
 sub calculateScore (@hand) {
     my $score = 0;
     my $hasAce = False;
+
+    for @hand -> $card {
+        if $card ~~ Str {
+            if $card eq "A" {
+                $hasAce = True;
+            }else {
+                $score += 10
+            }
+        }else {
+            $score += $card;
+        }
+    }
+
+    if $hasAce {
+        if ($score + 11) >12 {
+            $score += 1;
+        } else {
+            $score += 11
+        }
+    }
+    return $score;
 }
 
 sub printStatus (@playerCards, @dealerCards) {
@@ -17,8 +38,8 @@ sub printStatus (@playerCards, @dealerCards) {
 }
 
 sub MAIN() {
-    my @playerHand = "A", "2", "5";
-    my @dealerHand = "J", "3", "10";
+    my @playerHand = "A", 2, 5;
+    my @dealerHand = "J", 3, 10;
 
     printStatus @playerHand, @dealerHand;
  }
