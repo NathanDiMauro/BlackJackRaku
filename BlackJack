@@ -1,5 +1,9 @@
 #!/usr/bin/env perl6
 
+sub drawCard (@hand, @deck) {
+    @hand.push(@deck.pop);
+}
+
 sub calculateScore (@hand) {
     my $score = 0;
     my $hasAce = False;
@@ -38,8 +42,5 @@ sub printStatus (@playerCards, @dealerCards) {
 }
 
 sub MAIN() {
-    my @playerHand = "A", 2, 5;
-    my @dealerHand = "J", 3, 10;
 
-    printStatus @playerHand, @dealerHand;
  }
