@@ -42,5 +42,53 @@ sub printStatus (@playerCards, @dealerCards) {
 }
 
 sub MAIN() {
+    my @deck = 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A";
+    @deck.=pick(@deck);
 
- }
+    my @playerHand;
+    my @dealerHand;
+
+    say "Dealer draws first card\n";
+    drawCard @dealerHand, @deck;
+    drawCard @playerHand, @deck;
+    drawCard @playerHand, @deck;
+
+    printStatus @playerHand, @dealerHand;
+    my $still-playing = True;
+
+    while $still-playing {
+        say "Do you want to (H)it, (S)tay, or (Q)uit?";
+        my $user-input = get;
+
+        if $user-input eq "H" or $user-input eq "h" {
+            drawCard @playerHand, @deck;
+            printStatus @playerHand, @dealerHand;
+
+            if (calculateScore @playerHand) > 21 {
+                say "You busted! You lost!\n";
+                exit;
+            }
+        } elsif $user-input eq "S" or $user-input eq "s" {
+            $still-playing = False;
+        } elsif $user-input eq "Q" or $user-input eq "q" {
+            exit;
+        }
+    }
+
+    say "Dealer deals rest of cards.\n";
+    while (calculateScore @dealerHand) < 17 {
+        drawCard @dealerHand, @deck;
+    }
+    printStatus @playerHand, @dealerHand;
+
+    if (calculateScore @dealerHand) > 21 {
+        say "Dealer busts! You win!";
+    } elsif (calculateScore @dealerHand) > (calculateScore @playerHand) {
+        say "Dealer wins!"
+    } elsif (calculateScore @playerHand) > (calculateScore @dealerHand) {
+        say "You win!"
+    } else {
+        say "It's a tie!"
+    }
+
+}
