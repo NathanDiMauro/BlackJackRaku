@@ -2,7 +2,7 @@
 
 sub calculateScore (@hand) {
     my $score = 0;
-    my $hasAce = false;
+    my $hasAce = False;
 }
 
 sub printStatus (@playerCards, @dealerCards) {
