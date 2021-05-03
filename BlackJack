@@ -1,4 +1,24 @@
 #!/usr/bin/env perl6
 
+sub calculateScore (@hand) {
+    my $score = 0;
+    my $hasAce = false;
+}
 
-sub MAIN() { }
+sub printStatus (@playerCards, @dealerCards) {
+    say "Players total is " ~calculateScore @playerCards;
+
+    for @playerCards -> $card {print $card~" "}
+    say "\n";
+
+    say "Dealers total is " ~calculateScore @dealerCards;
+    for @dealerCards -> $card {print $card~" "}
+    say "\n";
+}
+
+sub MAIN() {
+    my @playerHand = "A", "2", "5";
+    my @dealerHand = "J", "3", "10";
+
+    printStatus @playerHand, @dealerHand;
+ }
