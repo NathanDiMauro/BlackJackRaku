@@ -21,7 +21,7 @@ sub calculateScore (@hand) {
     }
 
     if $hasAce {
-        if ($score + 11) >12 {
+        if ($score + 11) > 21 {
             $score += 1;
         } else {
             $score += 11
